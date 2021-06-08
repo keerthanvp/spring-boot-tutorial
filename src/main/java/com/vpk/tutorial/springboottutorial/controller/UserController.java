@@ -23,9 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PostService postService;
-
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user){
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
@@ -49,21 +46,6 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Integer userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping("/user/{userId}/post")
-    public ResponseEntity<Post> createPost(@PathVariable Integer userId, @RequestBody Post post){
-        return new ResponseEntity<>(postService.createPost(userId, post),HttpStatus.OK);
-    }
-
-    @GetMapping("/user/{userId}/post")
-    public ResponseEntity<List<Post>> retrieveAllPost(@PathVariable Integer userId){
-        return new ResponseEntity<>(postService.retrieveAllPost(userId),HttpStatus.OK);
-    }
-
-    @GetMapping("/user/{userId}/post/{postId}")
-    public ResponseEntity<Post> retrievePost(@PathVariable Integer userId, @PathVariable Integer postId){
-        return new ResponseEntity<>(postService.retrievePost(userId, postId),HttpStatus.OK);
     }
 
 }
