@@ -1,6 +1,5 @@
 package com.vpk.tutorial.springboottutorial.service.impl;
 
-import com.vpk.tutorial.springboottutorial.dao.UserDao;
 import com.vpk.tutorial.springboottutorial.dao.UserRepository;
 import com.vpk.tutorial.springboottutorial.exception.UserNotFoundException;
 import com.vpk.tutorial.springboottutorial.model.User;
@@ -13,9 +12,6 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    @Autowired
-    private UserDao userDao;
 
     @Autowired
     private UserRepository userRepository;
