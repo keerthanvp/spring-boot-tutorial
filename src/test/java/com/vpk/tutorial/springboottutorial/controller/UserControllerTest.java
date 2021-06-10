@@ -1,11 +1,9 @@
 package com.vpk.tutorial.springboottutorial.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vpk.tutorial.springboottutorial.exception.UserNotFoundException;
 import com.vpk.tutorial.springboottutorial.model.User;
 import com.vpk.tutorial.springboottutorial.service.UserService;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +26,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
