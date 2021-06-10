@@ -1,6 +1,5 @@
 package com.vpk.tutorial.springboottutorial.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vpk.tutorial.springboottutorial.model.User;
 import com.vpk.tutorial.springboottutorial.service.UserService;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.vpk.tutorial.springboottutorial.utility.Helper.asJsonString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,7 +47,7 @@ public class UserControllerTest {
         user = new User(1, "Mathew", 23, null);
         userList = new ArrayList<>();
         userList.add(user);
-        userList.add(new User(2,"Benjamin",28,null));
+        userList.add(new User(2, "Benjamin", 28, null));
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
@@ -61,8 +61,8 @@ public class UserControllerTest {
     public void createUserTest() throws Exception {
         when(userService.createUser(any())).thenReturn(user);
         mockMvc.perform(post("/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(user)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user)))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(asJsonString(user)))
                 .andDo(MockMvcResultHandlers.print());
@@ -84,7 +84,7 @@ public class UserControllerTest {
     @Test
     public void retrieveUserTest() throws Exception {
         when(userService.retrieveUser(user.getUserId())).thenReturn(Optional.of(user));
-        mockMvc.perform(get("/user/"+user.getUserId()).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/user/" + user.getUserId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(user)))
                 .andDo(MockMvcResultHandlers.print());
@@ -92,15 +92,8 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUserTest(){
+    public void deleteUserTest() {
 
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
